@@ -1,14 +1,14 @@
 body {
     height: 100vh;
     background: linear-gradient(to top left, #ffcb05, #3c5aa6);
-    display: flex;
-    align-items: center;
+    /* display: flex;
+    align-items: center; */
 }
 
 .section {
-    position: absolute;
-    top: 5%;
-    left: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-container {
@@ -20,6 +20,7 @@ body {
     text-align: center;
     box-shadow: 2px 2px 5px 2px black;
     border-radius: 1rem;
+    margin-inline: 0.5rem;
 }
 
 img {
@@ -45,7 +46,7 @@ img {
     cursor: pointer;
     position: absolute;
     top: 60%;
-    left: 47%;
+    left: 45%;
     border-radius: 10px;
 }
 
