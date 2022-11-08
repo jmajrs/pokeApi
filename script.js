@@ -1,6 +1,7 @@
 'use strict';
 
-const cardContainer = document.querySelector('.section')
+const cardContainer = document.querySelector('.section');
+const button = document.querySelector('.button');
 
 
 const getPokemon = function (pokemon) {
@@ -35,4 +36,6 @@ const getPokemon = function (pokemon) {
 
 };
 
-getPokemon('charizard');
+button.addEventListener('click', function () {
+    getPokemon('charizard');
+}); 
