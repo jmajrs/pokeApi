@@ -12,6 +12,9 @@ const getPokemon = function (id) {
 };
 
 const createPokemon = function (data) {
+    const name = data.name[0].toUpperCase();
+    data.name = name + data.name.slice(1);
+
     const html = `
     <div class="card-container">
     <div class="description">
@@ -45,7 +48,11 @@ button.addEventListener('click', async function () {
     createPokemon(pokemonData2);
     // createPokemon(pokemonData3); 
 
-    const fusion = pokemonData1.name.slice(0, 4) + pokemonData2.name.slice(-4);
-    createPokemon({ ...pokemonData2, name: fusion });
+    const fusionName = pokemonData1.name.slice(0, 4) + pokemonData2.name.slice(-4);
+    const attackFusion = pokemonData1.stats[1].base_stat + pokemonData2.stats[1].base_stat;
+    pokemonData2.stats[1].base_stat = attackFusion;
+    const deffenseFusion = pokemonData1.stats[2].base_stat + pokemonData2.stats[2].base_stat;
+    pokemonData2.stats[2].base_stat = deffenseFusion;
+    createPokemon({ ...pokemonData2, name: fusionName, });
 });
 
