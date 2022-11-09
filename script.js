@@ -4,16 +4,15 @@ const cardContainer = document.querySelector('.section');
 const button = document.querySelector('.button');
 
 
-const getPokemon = function (pokemon) {
-    const request = new XMLHttpRequest();
-    request.open('GET', `https://pokeapi.co/api/v2/pokemon/${pokemon}`);
-    request.send();
+const getPokemon = function (id) {
+    return fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(async r => {
+        let e = await r.json()
+        return e;
+    })
+};
 
-    request.addEventListener('load', function () {
-        const data = JSON.parse(this.responseText)
-        console.log(data);
-
-        const html = `
+const createPokemon = function (data) {
+    const html = `
     <div class="card-container">
     <div class="description">
         <img src="${data.sprites.other.dream_world.front_default}">
@@ -31,11 +30,22 @@ const getPokemon = function (pokemon) {
     </div>
     </p>
 </div>`;
-        cardContainer.insertAdjacentHTML('beforeend', html);
-    });
+    cardContainer.insertAdjacentHTML('beforeend', html);
+}
 
-};
+button.addEventListener('click', async function () {
+    let rand = (Math.trunc(Math.random() * 151) + 1);
+    const pokemonData1 = await getPokemon(rand)
 
-button.addEventListener('click', function () {
-    getPokemon('charizard');
-}); 
+    rand = (Math.trunc(Math.random() * 151) + 1);
+    const pokemonData2 = await getPokemon(rand)
+
+    // const pokemonData3 = await getPokemon(15)
+    createPokemon(pokemonData1);
+    createPokemon(pokemonData2);
+    // createPokemon(pokemonData3); 
+
+    const fusion = pokemonData1.name.slice(0, 4) + pokemonData2.name.slice(-4);
+    createPokemon({ ...pokemonData2, name: fusion });
+});
+
